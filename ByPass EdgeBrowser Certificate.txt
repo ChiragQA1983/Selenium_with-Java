@@ -1,0 +1,6 @@
+Note :- We will open the EdgeBrowser always in Guest mode to by pass Certificate edgebrowser alert as below
+
+EdgeOptions options = new EdgeOptions();
+options.addArguments("--guest");
+driver=new EdgeDriver(options);	
+	
