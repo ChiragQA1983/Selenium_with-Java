@@ -1,0 +1,36 @@
+1. We Always need to take care that we put assertions at right place as well driver.quiet should also be at right place
+   as Java is very sensetive language and we need to take care always for don't happen silly mistake of braces {} etc.
+   as it can be impact on output, specially for assertions and driver.quiet() or (AfterMethod and Before method) 
+   Teardown method
+   
+
+2. We Also needs to take care that we do have to put semicolon after any looping statement like for(i=0; i<=10; i++);
+   this will break the execution of your program and consider as a stopping point in java
+
+
+3. When we are puting 100% correct xpath and Robust wait mechanism and if even though our WebElement unable to locate
+   and Just blinking while click on it. at that time there are high changes that webelement contain under the iframe
+   so, in that case first we need to identified iframe and driver.switchto iframe and than needs to interact with our
+   webelement
+
+4. When We got an error that "Unable to find the Element" at that time some important points needs to take care
+
+   1. First we have to take care for iFrame, we have to check that, does our element is located under the iframe or not?
+      if our element located in iframe than we have to switch to iframe and locate the iframe like as below
+
+     		WebElement frame1 = driver.findElement(By.id("iframeResult"));
+		driver.switchTo().frame(frame1);
+
+    than we have to locate our element and again Switch to the main frame back like driver.switchTo().defaultElement();
+
+  2. Another thing we have to take care like Does Our element is come under any element like if any button available   
+     prior to our element and if we tried to locate directly our element than it will not going work and give an error
+     "Unable to find the element" So, first we have to interact with the element who is interrupted the click like
+     first we have to handle those element and than needs to come for our element for interaction, Especially
+     when Previous element is Any sucess message or any pop-up or any previous element can also make our execution
+     fail.	
+
+  3. Proper wait we have to pass for handle our element for prevent the error unable to locate element
+
+
+-----------------------------------------------------------------------------------------------------------------------

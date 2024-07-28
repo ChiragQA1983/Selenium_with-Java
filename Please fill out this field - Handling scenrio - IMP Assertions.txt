@@ -1,0 +1,30 @@
+url -> url=https://arityinventory.arityinfoway.com
+
+  Note :-> here we keep emailid blank and directly click on login button , errormessage cameup "please fill out this field."
+           We successfully assert this message using below way  
+     
+    @Test
+    public void testEmptyEmailFieldValidation() {
+       
+    	
+   
+    	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("username")));
+
+         // Wait for the loading panel to disappear (assuming it's hidden when the login button is clickable)
+ 	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loadingPanel")));
+       
+        WebElement Loginbtn=wait.until(ExpectedConditions.elementToBeClickable(By.xpath(loc.getProperty("Loginbtn"))));
+	    Loginbtn.click();
+        
+	    // Trigger the HTML5 validation message (e.g., by submitting the form)
+        // ...
+        
+        
+        // Get the validation message
+        String validationMessage = emailField.getAttribute("validationMessage");
+
+        // Assert the message
+        Assert.assertEquals(validationMessage, "Please fill out this field.");
+    }
+    

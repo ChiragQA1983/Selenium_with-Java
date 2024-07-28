@@ -1,0 +1,49 @@
+   Rules of If and else for semicolon ;
+   ------------------------------------
+1. In Java, semicolons are used to terminate statements, 
+   and they are not supposed to be used after if or else if 
+   conditions. When you add a semicolon after these conditions, 
+   it essentially terminates the statement, making the subsequent
+   block of code execute unconditionally.
+   ---------------------------------------------------------------
+   We can't put ; semicolon like as below
+   
+   Example :- 
+   public class BaseSetup {
+	public static WebDriver driver;
+	public static Properties prop=new Properties();
+	public static Properties loc=new Properties();
+	public static FileReader fr;
+	public static FileReader fr1;
+   
+
+@BeforeTest	
+public void BaseTest() throws IOException {
+	
+	if(driver==null)
+	{
+	fr=new FileReader ((System.getProperty("user.dir"))+"\\src\\test\\resources\\configfiles\\config.properties"); 
+	fr1=new FileReader((System.getProperty("user.dir"))+"\\src\\test\\resources\\configfiles\\locators.properties");
+	
+	prop.load(fr);
+	loc.load(fr1);
+	}
+	else if (prop.getProperty("browser").equalsIgnoreCase("chrome")); <-Semicolon like this will lead to the error
+	{
+	WebDriverManager.chromedriver().setup();	
+	driver=new ChromeDriver();	
+	driver.get(prop.getProperty("url"));
+	driver.manage().window().maximize();
+		
+	}
+
+	else if (prop.getProperty("browser").equalsIgnoreCase("edge"));
+	{
+		WebDriverManager.edgedriver().setup();
+		driver=new EdgeDriver();
+		driver.get(prop.getProperty("url"));
+		driver.manage().window().maximize();
+	}
+
+}
+--------------------------------------------------------------------------------
