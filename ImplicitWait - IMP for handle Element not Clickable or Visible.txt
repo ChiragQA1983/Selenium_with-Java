@@ -1,0 +1,31 @@
+ 
+
+	
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		 try {
+		 
+    	 driver.findElement(By.xpath(locator.getProperty("Fname"))).sendKeys(Fullname);
+    
+    	 
+    	 driver.findElement(By.xpath(locator.getProperty("uname"))).sendKeys(Username);
+    	
+    	 
+    	 driver.findElement(By.xpath(locator.getProperty("emailadd"))).sendKeys(EmailAddress);
+
+    	 driver.findElement(By.xpath(locator.getProperty("pass"))).sendKeys(Password);
+    	 
+    	 driver.findElement(By.xpath(locator.getProperty("confirmpassword"))).sendKeys(ConfirmPassword);
+    	
+    	 driver.findElement(By.xpath(locator.getProperty("joinnow"))).click();
+    	 
+		 } catch (Exception e) {
+    		e.printStackTrace();
+    			   
+    		   }
+    		   finally {
+    		   }
+    	  
+    	   	System.out.println("Test Successfully perform ");
+ 
+		}
+}

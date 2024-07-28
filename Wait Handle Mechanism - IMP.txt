@@ -1,0 +1,4 @@
+Implicit Wait
+_____________
+
+driver.manage().timeouts().implicitelywait(time);
