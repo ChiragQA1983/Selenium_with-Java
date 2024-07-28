@@ -1,0 +1,49 @@
+// While click on Allproducts it was not clickable so, applied mechanism below of retry click and it is working now  
+   
+            retryCount = 4;
+           for (int i = 0; i < retryCount; i++) {
+               try {
+                   // Wait for the Live Preview link to be present
+            	   WebElement allProducts = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[3]/header/div[2]/div/nav/div/ul[1]/li[8]/a")));
+        
+
+                   // Click on Live Preview
+            	   allProducts.click();
+                   
+                   // Exit the loop if click is successful
+                   break;
+               } catch (ElementClickInterceptedException e) {
+                   // Handle the exception or wait a bit and retry
+                   Thread.sleep(1000);
+               }
+           }
+-----------------------------------------------------------------------------------------------------------------
+IMP Note :- When we got continuosly error like Element not clickable or visible than we also need to make sure that
+	    if we Switch to iframe for previous element than we need to switch back to defaultcontent if we forgot
+	    to switch back to defaultcontent than error will come again for e.g. in below code savebutton was send
+	    an error so we switch back to defaultcontent for click save button
+
+WebElement iframe=driver.findElement(By.cssSelector("#cke_1_contents > iframe"));
+ 
+ driver.switchTo().frame(iframe);
+ 
+ Thread.sleep(2000);
+ WebElement msgtextbox=driver.findElement(By.xpath("//body[contains(@class, 'cke_editable')]"));
+ msgtextbox.sendKeys("This is test of Notification");
+
+ // Switch back to the default content or parent frame
+ driver.switchTo().defaultContent(); // Switching back to the main content
+ 
+ //Find the Save button element
+
+WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#notifyForm > div > div.modal-footer > button.btn.btn-success")));
+
+//Scroll to the Save button using JavaScript Executor
+JavascriptExecutor js = (JavascriptExecutor) driver;
+js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });", saveButton);
+
+Thread.sleep(3000);
+//Click on the Save button
+saveButton.click();
+
+           
