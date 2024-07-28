@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Combobox_UL_li {
+public class Combobox_List_Handle {
     WebDriver driver;   
 	
 	@BeforeClass
