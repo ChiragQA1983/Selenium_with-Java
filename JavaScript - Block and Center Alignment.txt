@@ -1,0 +1,3 @@
+WebElement element = driver.findElement(By.id("select2-shipAddress-container"));
+JavascriptExecutor executor = (JavascriptExecutor) driver;
+executor.executeScript("arguments[0].scrollIntoView({ block: 'center' });", element);
