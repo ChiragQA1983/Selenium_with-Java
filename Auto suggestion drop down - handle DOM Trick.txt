@@ -1,0 +1,11 @@
+1. Go to Inspect element
+2. Then Go to Event Listners
+3. Click on Blur 
+   Then
+   Remove, Remove, Remove 
+4. Then Try again search option will work correct
+
+
+
+
+
