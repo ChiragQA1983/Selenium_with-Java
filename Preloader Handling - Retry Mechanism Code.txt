@@ -1,0 +1,24 @@
+public void waitForLoadingPanelToDisappear() {
+    logger.info("Waiting for the loading panel to disappear...");
+
+    By preloaderLocator = By.xpath("//div[@id='loadingPanel' and @class='loader-wapper']");
+    int maxRetries = 3;
+
+    for (int i = 0; i < maxRetries; i++) {
+        try {
+            FluentWait wait = new FluentWait(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofMillis(500))
+                    .ignoring(NoSuchElementException.class);
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(preloaderLocator));
+            break; // Break the loop if the condition is met
+        } catch (TimeoutException e) {
+            logger.warn("Loading panel not disappeared on attempt {} of {}.", i + 1, maxRetries);
+            if (i == maxRetries - 1) {
+                logger.error("TimeoutException: Loading panel did not disappear within the expected time.");
+                throw e;
+            }
+        }
+    }
+}

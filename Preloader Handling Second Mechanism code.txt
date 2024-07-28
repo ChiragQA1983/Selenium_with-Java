@@ -1,0 +1,21 @@
+private void waitForLoadingPanelToDisappear() {
+    logger.info("Waiting for the loading panel to disappear...");
+
+    By preloaderLocator = By.xpath("//div[@id='loadingPanel' and @class='loader-wapper']");
+
+    if (driver.findElements(preloaderLocator).size() > 0) {
+        try {
+            FluentWait wait = new FluentWait(driver)
+                    .withTimeout(Duration.ofSeconds(20))
+                    .pollingEvery(Duration.ofMillis(500))
+                    .ignoring(NoSuchElementException.class);
+
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(preloaderLocator));
+        } catch (TimeoutException e) {
+            logger.error("TimeoutException: Loading panel did not disappear within the expected time.");
+            throw e;
+        }
+    } else {
+        logger.info("Loading panel is not present. Skipping waiting process.");
+    }
+}
