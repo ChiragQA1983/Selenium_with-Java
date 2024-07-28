@@ -1,0 +1,48 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogLevel;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.apache.commons.io.FileUtils;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+
+public class ConsoleErrorCapture {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        ChromeOptions options = new ChromeOptions();
+        options.setCapability("goog:loggingPrefs", "{\"browser\": \"ALL\"}");
+
+        WebDriver driver = new ChromeDriver(options);
+
+        try {
+            driver.get("Your_URL_Here");
+
+            // Perform actions on your web application
+
+            // Capture console logs
+            LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
+            for (LogEntry entry : logs) {
+                if (entry.getLevel() == LogLevel.SEVERE) {
+                    System.out.println("Console Error: " + entry.getMessage());
+
+                    Date currentDate = new Date();
+                    String logFilename = currentDate.toString().replace(" ", "-").replace(":", "-");
+
+                    File logFile = new File(".//logs//" + logFilename + ".txt");
+                    FileUtils.writeStringToFile(logFile, entry.getMessage(), "UTF-8");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
+    }
+}

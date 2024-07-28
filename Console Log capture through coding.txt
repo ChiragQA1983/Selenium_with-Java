@@ -1,0 +1,17 @@
+// ... (Previous code)
+
+// Capture console logs
+LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
+for (LogEntry entry : logs) {
+    if (entry.getLevel() == Level.SEVERE) {  // Change LogLevel to Level here
+        System.out.println("Console Error: " + entry.getMessage());
+
+        Date currentDate = new Date();
+        String logFilename = currentDate.toString().replace(" ", "-").replace(":", "-");
+
+        File logFile = new File(".//logs//" + logFilename + ".txt");
+        FileUtils.writeStringToFile(logFile, entry.getMessage(), "UTF-8");
+    }
+}
+
+// ... (Rest of the code)
