@@ -1,0 +1,29 @@
+WebElement StoretoStoreSell=wait.until(ExpectedConditions.elementToBeClickable(By.id("stock_point_holder_id")));
+		
+		Select select=new Select(StoretoStoreSell);
+		select.selectByVisibleText("ArityQAQC");
+		
+		WebElement Addbtn=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn btn-success pull-right']")));
+		Addbtn.click();
+		
+		// Wait for the table to update after clicking Add button
+		WebDriverWait tableWait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Adjust timeout as needed
+		tableWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='SPHTOSPHSELLLIST']/tr[2]/td[1]")));
+
+		// Find the table cell that contains "ArityQAQC"
+		WebElement cellElement = driver.findElement(By.xpath("//*[@id='SPHTOSPHSELLLIST']/tr[2]/td[1]"));
+
+		// Get the text from the table cell
+		String cellText = cellElement.getText();
+
+		try {
+		    // Perform assertion
+		    Assert.assertEquals(cellText, "ArityQAQC", "Value 'ArityQAQC' not found in the table");
+
+		    // If the assertion passes, it means "ArityQAQC" is present in the table
+		} catch (AssertionError e) {
+
+		   captureScreenshot();
+		}
+	
+	}
