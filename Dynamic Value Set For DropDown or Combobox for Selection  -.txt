@@ -1,0 +1,62 @@
+Example 1 :- 
+
+	
+    String desiredTime = testdata.getProperty("setcheckintime");
+    String xpathForDesiredTime = "//ul[@class='ui-timepicker-list']//li[contains(text(), '" + desiredTime + "')]";
+    WebElement desiredTimeOption = timeOptionsList.findElement(By.xpath(xpathForDesiredTime));
+    desiredTimeOption.click();
+---------------------------------------------------------------------------------------------------
+Example 2 :- 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+public class SpanDropdownExample {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("URL_OF_YOUR_PAGE");
+
+        // Load properties from the config file
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileReader("path/to/test.configproperties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Click the dropdown button to open the dropdown
+        WebElement dropdownButton = driver.findElement(By.cssSelector(".btn.dropdown-toggle"));
+        dropdownButton.click();
+
+        // Wait for the searchable textbox to appear (adjust timeout as needed)
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchTextBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".form-control")));
+
+        // Type the value from the properties file into the textbox
+        searchTextBox.sendKeys(properties.getProperty("listvalue"));
+
+        // Wait for the option from the properties file to appear in the filtered list
+        String optionText = properties.getProperty("listvalue");
+        WebElement optionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[@class='text' and text()='" + optionText + "']")
+        ));
+
+        // Click the option from the properties file
+        optionElement.click();
+
+        // Your further actions with the selected option
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+

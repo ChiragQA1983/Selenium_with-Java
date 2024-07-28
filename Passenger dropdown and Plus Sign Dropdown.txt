@@ -1,0 +1,25 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DropdownExample {
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://example.com"); // Replace with the actual URL of the page
+
+        // Identify and click on the dropdown element
+        WebElement dropdown = driver.findElement(By.id("dropdownId"));
+        dropdown.click();
+
+        // Locate and click on the plus sign to increase the passenger count
+        WebElement plusSign = driver.findElement(By.cssSelector("span.plus-sign"));
+        plusSign.click();
+
+        // Locate and click on the minus sign to decrease the passenger count
+        WebElement minusSign = driver.findElement(By.cssSelector("span.minus-sign"));
+        minusSign.click();
+
+        driver.quit();
+    }
+}

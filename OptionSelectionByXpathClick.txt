@@ -1,0 +1,24 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+public class DropdownExample {
+    
+    public static void main(String[] args) {
+        // Assuming you have a WebDriver instance named "driver"
+        WebDriver driver = ...; // Initialize your WebDriver instance
+
+        // Locate the dropdown button
+        WebElement dropdownButton = driver.findElement(By.className("btn-link"));
+
+        // Click the dropdown button to open the dropdown
+        dropdownButton.click();
+
+        // Locate the dropdown option you want to select
+        WebElement optionToSelect = driver.findElement(By.xpath("//span[text()='zuhair [bank-1]']"));
+
+        // Click the option to select it
+        optionToSelect.click();
+    }
+}
