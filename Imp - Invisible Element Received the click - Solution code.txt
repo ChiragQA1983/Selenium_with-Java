@@ -1,0 +1,27 @@
+for e.g. here in below example Loginbutton was not clickable
+
+note -> We should not used javascriptexecutor unless and until it is hard need 
+
+
+
+// If any invisible element received the click and in Console we are getting an error that different element received the click
+   then we can try below code for e.g. Preloader received the click then in console it will also mentioned that which element 
+   received the click so, we can use that locators to close that element through selenium code like below
+
+  
+  boolean invisible=wait.until(ExpectedConditions.invisiblilityOfElementLocated(By.id("Preloader"))); // 
+<- this is boolean condition we can put for invisibility of element
+  if (invisible) {
+		 WebElement Loginbutton =driver.findElement(By.xpath("//input[@value='Login']));
+                 LoginButton.Click();
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+// Another way to handle the Element not clickable is Javascript executor as below
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+WebElement Loginbutton =driver.findElement(By.xpath("//input[@value='Login']));
+js.executeScript("argument[0].click();", loginButton);
+
+
+ 
