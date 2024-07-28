@@ -1,0 +1,21 @@
+Question to Chapt GPT :- 
+
+        I am getting an error for .ignoring -----    
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+       .withTimeout(Duration.ofSeconds(30)) // Maximum wait time
+       .pollingEvery(Duration.ofMillis(500)) // Polling interval
+       .ignoring(TimeoutException.class); // Ignore TimeoutException
+       .ignoring(NoSuchElementException.class);
+-----------------------------------------------------------------------------------------
+Answer :- The error you're encountering is because of the semicolon after the 
+	  line .ignoring(TimeoutException.class). When you use method chaining in Java,
+ 	  you should not terminate the chain with a semicolon. 
+		
+         Here's the corrected code:
+		
+	 FluentWait<WebDriver> wait = new FluentWait<>(driver)
+   	.withTimeout(Duration.ofSeconds(30)) // Maximum wait time
+   	.pollingEvery(Duration.ofMillis(500)) // Polling interval
+   	.ignoring(TimeoutException.class) // Ignore TimeoutException
+   	.ignoring(NoSuchElementException.class);
+------------------------------------------------------------------------------------------
