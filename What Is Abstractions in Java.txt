@@ -1,0 +1,73 @@
+* Abstraction is a fundamental concept in Java (and in object-oriented programming in general) that allows you to hide complex implementation details
+  and focus on essential features of an object. 
+* It helps you create more manageable and understandable code by simplifying the way you interact with objects.
+* In Java, abstraction is often achieved through abstract classes and interfaces. 
+  Here's a simple example to help you understand abstraction:
+* Suppose we want to create a program to model different shapes, such as circles and rectangles. 
+  We can use abstraction to create a common interface for all shapes, even though each shape might have different properties and behaviors.
+_________________________________________________________________________________________________________________________________________
+java
+Copy code
+// Step 1: Define an abstract Shape class (abstraction)
+abstract class Shape {
+    // Abstract method to get the area of the shape
+    abstract double getArea();
+}
+
+// Step 2: Create concrete classes that inherit from the Shape class
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    double getArea() {
+        return length * width;
+    }
+}
+In this example:
+
+* We create an abstract class called Shape. This class defines an abstract method getArea() without providing an implementation. 
+  This means that any class inheriting from Shape must provide its own implementation of getArea().
+* We then create two concrete classes, Circle and Rectangle, both of which extend the Shape class. 
+  These classes provide specific implementations for the getArea() method based on their respective shapes.
+* Now, you can use these classes to work with shapes in a more abstract way:
+
+java
+Copy code
+public class Main {
+    public static void main(String[] args) {
+        // Create instances of Circle and Rectangle
+        Circle circle = new Circle(5.0);
+        Rectangle rectangle = new Rectangle(4.0, 6.0);
+
+        // Calculate and display the areas of the shapes
+        System.out.println("Circle Area: " + circle.getArea());
+        System.out.println("Rectangle Area: " + rectangle.getArea());
+    }
+}
+* This code demonstrates how abstraction allows you to create a common interface for different shapes while hiding the implementation details
+  specific to each shape. 
+* Abstraction helps you focus on the essential properties and behaviors of objects, making your code more organized and easier to maintain.
+
+
+
+
+
