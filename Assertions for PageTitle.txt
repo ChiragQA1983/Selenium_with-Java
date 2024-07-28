@@ -1,0 +1,16 @@
+String initialTitle = basePage.getPageTitle(); // Invoke getPageTitle() from BasePage
+Assert.assertEquals(initialTitle, "Bill-POS-Sale", "Initial page title is not 'Bill-POS-Sale'");
+test.log(Status.INFO, "Asserted initial page title");
+
+// Assert the page title after the action
+String pageTitleAfterAction = basePage.getPageTitle(); // Invoke getPageTitle() again
+if (!pageTitleAfterAction.equals("Bill-POS-Sale")) {
+    captureScreenshot();
+    
+    // Get the different page title using driver.getTitle()
+    String differentTitle = driver.getTitle();
+    
+    // Log the different title
+    test.log(Status.INFO, "Captured screenshot because page title is different: " + pageTitleAfterAction);
+    test.log(Status.INFO, "Different page title obtained: " + differentTitle);
+}

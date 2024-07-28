@@ -1,0 +1,57 @@
+//div[contains(text(),'Login Successfully')] 
+
+#\35  > div.Toastify__toast-body > div:nth-child(2)
+
+//*[@id="6"]/div[1]/div[2]
+
+-------------------------------------------------
+//div[contains(text(),'OTP Sent successfully')]
+-------------------------------------------------
+
+package TestCases;
+
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import Base_Setup.BaseSetup;
+import Utility.ReadDataFromExcelFile;
+
+public class TC_SocialMediaLinks extends BaseSetup {
+
+	@Test(dataProviderClass = ReadDataFromExcelFile.class, dataProvider = "Regression")
+   
+	public void SocialMediaLinkVerification(String SocialMediaLinks, String expectedUrl) throws IOException {
+        // Click on Facebook link
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement facebookLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SocialMediaLinks)));
+        facebookLink.click();
+
+        // Get window handles and switch to the new window
+        Set<String> windowHandles = driver.getWindowHandles();
+        Iterator<String> iterator = windowHandles.iterator();
+        String parentWindow = iterator.next();
+        String childWindow = iterator.next();
+        driver.switchTo().window(childWindow);
+
+        // Verify the URL
+        String currentUrl = driver.getCurrentUrl();
+       // String expectedUrl = "https://www.facebook.com/Headwaybsl/";
+        if (currentUrl.equals(expectedUrl)) {
+            System.out.println("Facebook link URL verified successfully.");
+        } else {
+            System.out.println("Facebook link URL verification failed. Expected URL: " + expectedUrl + ", Actual URL: " + currentUrl);
+        }
+
+        // Close the new window and switch back to the parent window
+        driver.close();
+        driver.switchTo().window(parentWindow);
+    }
+}

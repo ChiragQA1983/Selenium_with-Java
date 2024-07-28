@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=p3q_Wy4AjHs&t=1627s
+
+How to Handle Pagination in Selenium Webdriver | How to Handle Dynamic WebTable |Webtable Pagination
+
+
+https://datatables.net/examples/advanced_init/dt_events.html

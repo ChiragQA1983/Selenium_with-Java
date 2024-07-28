@@ -1,0 +1,63 @@
+// Assertion should be placed outside the loop Always Like in below example
+--------------------------------------------------------------------------------------
+package Practice_Tutorial;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import io.github.bonigarcia.wdm.WebDriverManager;
+public class WebTableTest {
+
+	//// Assertion should be placed outside the loop
+	
+    @Test
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://pos.arityinfoway.com/login");
+        driver.manage().window().maximize();
+       // driver.manage().deleteAllCookies();
+        
+        driver.findElement(By.id("login-username")).sendKeys("admin");
+        driver.findElement(By.id("login-password")).sendKeys("admin");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        driver.findElement(By.xpath("//span[normalize-space()='Purchase']")).click();
+        driver.findElement(By.xpath("//a[normalize-space()='Purchase List']")).click();
+        
+        JavascriptExecutor js =(JavascriptExecutor)driver;
+        
+        ////table[@id='sale-table']//td
+        
+        //First we need to locate xpath of whole table
+       
+        List<WebElement>Table=driver.findElements(By.xpath("//table[@id='purchase-table']//td"));
+        
+        boolean status=false;
+        
+        for(WebElement ele:Table)
+        {
+        	js.executeScript("arguments[0].scrollIntoView()", ele);
+        	String value=ele.getText();
+        	System.out.println(value);
+        
+        	System.out.println("Value of data is :" +value);
+        	
+         if(value.contains("19-12-2023"))
+         {
+        	
+        	 status=true;
+        	 break;
+         }
+        	
+        }
+        //// Assertion should be placed outside the loop
+        Assert.assertTrue(status, "Record did not found");
+        driver.quit();

@@ -1,0 +1,12 @@
+Actions, Functions or Tasks for Which We will Use Driver as a Parameter
+---------------------------------------------------------------------------
+Example below ---> 
+
+	
+	Actions action=new Actions(driver); // <- pass driver
+	action.moveToElement(desktop).build().perform();	
+--------------------------------------------------------------------------
+
+  JavascriptExecutor js=(JavascriptExecutor)driver;   // <- Pass driver
+
+
