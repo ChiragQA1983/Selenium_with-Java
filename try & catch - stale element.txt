@@ -1,0 +1,52 @@
+1st Way -
+
+
+try{
+    Element.click();
+}catch(StaleElementReferenceException st) {   
+  System.out.println("Got the StaleElementRef Exception...trying to create fresh reference);
+   Object=driver.findElement(By.xpath("yourxpath));
+   Object.click();
+}catch(WebDriverException we) {                   // it will create a fresh reference
+   we.printStackTrce();
+}	
+driver.quit();
+  
+_________________________________________________________________________________________________
+
+2nd Way -
+
+WebDriverWait wait = new WebDriverWait(driver, 20);
+if(wait.until(ExpectedConditions.stalenessof(Object))==false) {
+   Object.click();
+   System.out.println("Element is attached to the DOM");
+}else {
+   System.out.println("Element is attached to the DOM");
+   wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessof(Object));
+   Object.click();
+}
+_________________________________________________________________________________
+E.g.
+
+// Open PHP, IOT Open Source Main Category
+    WebElement phpCategory = driver.findElement(By.xpath("//li[@class='menu_has_children']//span[text()='PHP, IOT Open Source']"));
+    action.moveToElement(phpCategory).perform();
+    wait.withTimeout(Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(phpCategory));
+
+
+
+ try {
+     // Open PHP, IOT Open Source Main Category
+     phpCategory = driver.findElement(By.xpath("//li[@class='menu_has_children']//span[text()='PHP, IOT Open Source']"));
+     action.moveToElement(phpCategory).perform();
+     wait.withTimeout(Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(phpCategory));
+ } catch (StaleElementReferenceException e) {
+     // If the phpCategory element becomes stale, try to find it again
+     phpCategory = driver.findElement(By.xpath("//li[@class='menu_has_children']//span[text()='PHP, IOT Open Source']"));
+     action.moveToElement(phpCategory).perform();
+     wait.withTimeout(Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(phpCategory));
+ }
+    	
+
+
+
