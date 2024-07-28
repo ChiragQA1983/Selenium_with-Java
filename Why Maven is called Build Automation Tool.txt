@@ -1,0 +1,3 @@
+Maven is taken care of all your jar files by dependencies Selenium-java, TestNG, Report-NG, Apache-POI , etc. 
+and No need to manually copy and paste jar files into selenium project so, that's why maven called as 
+build automation tool

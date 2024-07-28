@@ -1,0 +1,13 @@
+Below are source folder it is important folders
+
+src/main/java  <- utilities, libraries, baseclasses, etc. 
+		 (under src/main/java <- you need to include your projectname like this 
+		 src/main/java 
+		 package 1 name -> com.crm.qa.pages
+		 package 2 name -> com.crm.qa.base
+		 package 3 name -> com.crm.qa.config
+		 package 4 name -> com.crm.qa.testdata
+
+src/test/java  <- Only contain Testcases like this packagename we will include  -> com.crm.qa.testcases
+
+		(Note:- For Report We will not create any Package it will automatically done)
