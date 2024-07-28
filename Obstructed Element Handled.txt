@@ -1,0 +1,20 @@
+//Initially unable to click in Logo's detail bcz there was two obstructed element were received click then use retry techniques as below for click        
+        int retryCount = 3;
+        for (int i = 0; i < retryCount; i++) {
+            try {
+                wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+                // Wait for the blocking element to disappear
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("p.text-white")));
+
+                // Wait for the preloader to disappear
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div.preloader")));
+
+                WebElement detail = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".product-card__btn-area > a:nth-child(1)")));
+                detail.click();
+                break; // Exit loop if click is successful
+            } catch (ElementClickInterceptedException e) {
+                // Handle the exception or wait a bit and retry
+                Thread.sleep(1000);
+            }
+        }

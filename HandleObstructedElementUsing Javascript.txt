@@ -1,0 +1,30 @@
+ // Handle the modal dialog if it's present
+        handleModalDialog(driver);
+
+        // Locate and click the "Login" element using JavaScript
+        WebElement login = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Login']")));
+        clickElementWithJavaScript(driver, login);
+
+        // Rest of your code...
+    }
+
+    // Method to handle a modal dialog if it's present
+    public static void handleModalDialog(WebDriver driver) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement modalDialog = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("loginMessageModal")));
+
+            // If the modal dialog is present, close it using JavaScript
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].style.display='none';", modalDialog);
+        } catch (Exception e) {
+            // Handle the case when the modal dialog is not present
+            // You can log a message or perform other actions if needed
+        }
+    }
+
+    // Method to click an element using JavaScript
+    public static void clickElementWithJavaScript(WebDriver driver, WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }

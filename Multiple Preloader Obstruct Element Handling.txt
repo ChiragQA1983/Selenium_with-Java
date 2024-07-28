@@ -1,0 +1,11 @@
+/ Method to wait for the preloader to disappear
+	public static void waitForPreloaderToDisappear(WebDriver driver) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+	    wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("preloader")));
+	}
+
+	// Method to click an element after handling preloader
+	public static void clickElementWithPreloaderHandling(WebDriver driver, WebElement element) {
+	    waitForPreloaderToDisappear(driver);
+	    element.click();
+	}
